@@ -58,4 +58,8 @@ public class RecommendationResponseDTO {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    public Integer getTargetLevel() {
+        return requiredLevel;
+    }
 }

@@ -37,9 +37,6 @@ public class StudentSkillService {
         if (request == null) {
             throw new BadRequestException("Request body cannot be null");
         }
-        if (request.getSkillId() == null) {
-            throw new BadRequestException("Skill ID cannot be null");
-        }
         if (request.getProficiency() == null) {
             throw new BadRequestException("Proficiency cannot be null");
         }
@@ -48,9 +45,17 @@ public class StudentSkillService {
         }
 
         Student student = studentService.getStudentEntityById(studentId);
-        Skill skill = skillService.getSkillEntityById(request.getSkillId());
 
-        if (studentSkillRepository.existsByStudentIdAndSkillId(studentId, request.getSkillId())) {
+        Skill skill;
+        if (request.getSkillId() != null) {
+            skill = skillService.getSkillEntityById(request.getSkillId());
+        } else if (request.getSkill() != null && !request.getSkill().trim().isEmpty()) {
+            skill = skillService.getOrCreateSkill(request.getSkill().trim());
+        } else {
+            throw new BadRequestException("Skill ID or skill name must be provided");
+        }
+
+        if (studentSkillRepository.existsByStudentIdAndSkillId(studentId, skill.getId())) {
             throw new DuplicateResourceException("Skill already assigned to this student");
         }
 

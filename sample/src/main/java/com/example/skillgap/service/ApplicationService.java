@@ -70,7 +70,9 @@ public class ApplicationService {
         return new ApplicationResponseDTO(
                 saved.getId(),
                 student.getId(),
+                student.getName(),
                 job.getId(),
+                job.getTitle(),
                 saved.getMatchPercent(),
                 saved.getStatus(),
                 saved.getCreatedAt()
@@ -83,7 +85,9 @@ public class ApplicationService {
                 .map(app -> new ApplicationResponseDTO(
                         app.getId(),
                         app.getStudent().getId(),
+                        app.getStudent().getName(),
                         app.getJob().getId(),
+                        app.getJob().getTitle(),
                         app.getMatchPercent(),
                         app.getStatus(),
                         app.getCreatedAt()
@@ -101,7 +105,9 @@ public class ApplicationService {
         return new ApplicationResponseDTO(
                 app.getId(),
                 app.getStudent().getId(),
+                app.getStudent().getName(),
                 app.getJob().getId(),
+                app.getJob().getTitle(),
                 app.getMatchPercent(),
                 app.getStatus(),
                 app.getCreatedAt()

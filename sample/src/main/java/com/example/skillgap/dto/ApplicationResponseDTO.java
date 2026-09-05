@@ -6,7 +6,9 @@ public class ApplicationResponseDTO {
 
     private Long id;
     private Long studentId;
+    private String studentName;
     private Long jobId;
+    private String jobTitle;
     private Double matchPercent;
     private String status;
     private LocalDateTime createdAt;
@@ -31,6 +33,17 @@ public class ApplicationResponseDTO {
         this.createdAt = createdAt;
     }
 
+    public ApplicationResponseDTO(Long id, Long studentId, String studentName, Long jobId, String jobTitle, Double matchPercent, String status, LocalDateTime createdAt) {
+        this.id = id;
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.jobId = jobId;
+        this.jobTitle = jobTitle;
+        this.matchPercent = matchPercent;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,12 +60,28 @@ public class ApplicationResponseDTO {
         this.studentId = studentId;
     }
 
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
     public Long getJobId() {
         return jobId;
     }
 
     public void setJobId(Long jobId) {
         this.jobId = jobId;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public Double getMatchPercent() {

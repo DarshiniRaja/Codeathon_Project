@@ -68,4 +68,12 @@ public class JobSkillResponseDTO {
     public void setMandatory(Boolean mandatory) {
         this.mandatory = mandatory;
     }
+
+    public String getSkill() {
+        return skillName;
+    }
+
+    public void setSkill(String skill) {
+        this.skillName = skill;
+    }
 }

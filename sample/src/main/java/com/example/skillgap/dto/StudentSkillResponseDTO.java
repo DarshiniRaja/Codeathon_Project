@@ -58,4 +58,12 @@ public class StudentSkillResponseDTO {
     public void setProficiency(Integer proficiency) {
         this.proficiency = proficiency;
     }
+
+    public String getSkill() {
+        return skillName;
+    }
+
+    public void setSkill(String skill) {
+        this.skillName = skill;
+    }
 }

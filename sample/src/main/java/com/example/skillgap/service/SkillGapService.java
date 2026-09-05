@@ -77,7 +77,7 @@ public class SkillGapService {
 
         // 5. Handle case where job has no required skills
         if (jobSkills.isEmpty()) {
-            return new SkillGapResponseDTO(studentId, jobId, 0.0, Collections.emptyList());
+            return new SkillGapResponseDTO(studentId, student.getName(), jobId, job.getTitle(), 0.0, Collections.emptyList());
         }
 
         List<SkillGapItemDTO> items = new ArrayList<>();
@@ -123,6 +123,6 @@ public class SkillGapService {
                     .doubleValue();
         }
 
-        return new SkillGapResponseDTO(studentId, jobId, matchPercent, items);
+        return new SkillGapResponseDTO(studentId, student.getName(), jobId, job.getTitle(), matchPercent, items);
     }
 }

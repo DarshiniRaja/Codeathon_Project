@@ -2,6 +2,7 @@ package com.example.skillgap.service;
 
 import com.example.skillgap.dto.StudentRequestDTO;
 import com.example.skillgap.dto.StudentResponseDTO;
+import com.example.skillgap.dto.StudentSkillResponseDTO;
 import com.example.skillgap.entity.Student;
 import com.example.skillgap.exception.BadRequestException;
 import com.example.skillgap.exception.DuplicateResourceException;
@@ -52,14 +53,23 @@ public class StudentService {
     @Transactional(readOnly = true)
     public List<StudentResponseDTO> getAllStudents() {
         return studentRepository.findAll().stream()
-                .map(s -> new StudentResponseDTO(s.getId(), s.getName(), s.getEmail()))
+                .map(s -> new StudentResponseDTO(s.getId(), s.getName(), s.getEmail(), s.getStudentSkills().size()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public StudentResponseDTO getStudentById(Long id) {
         Student student = getStudentEntityById(id);
-        return new StudentResponseDTO(student.getId(), student.getName(), student.getEmail());
+        List<StudentSkillResponseDTO> skillDTOs = student.getStudentSkills().stream()
+                .map(ss -> new StudentSkillResponseDTO(
+                        ss.getId(),
+                        student.getId(),
+                        ss.getSkill().getId(),
+                        ss.getSkill().getName(),
+                        ss.getProficiency()
+                ))
+                .collect(Collectors.toList());
+        return new StudentResponseDTO(student.getId(), student.getName(), student.getEmail(), skillDTOs);
     }
 
     @Transactional(readOnly = true)

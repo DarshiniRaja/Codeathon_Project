@@ -37,9 +37,6 @@ public class JobSkillService {
         if (request == null) {
             throw new BadRequestException("Request body cannot be null");
         }
-        if (request.getSkillId() == null) {
-            throw new BadRequestException("Skill ID cannot be null");
-        }
         if (request.getRequiredLevel() == null) {
             throw new BadRequestException("Required level cannot be null");
         }
@@ -48,9 +45,17 @@ public class JobSkillService {
         }
 
         Job job = jobService.getJobEntityById(jobId);
-        Skill skill = skillService.getSkillEntityById(request.getSkillId());
 
-        if (jobSkillRepository.existsByJobIdAndSkillId(jobId, request.getSkillId())) {
+        Skill skill;
+        if (request.getSkillId() != null) {
+            skill = skillService.getSkillEntityById(request.getSkillId());
+        } else if (request.getSkill() != null && !request.getSkill().trim().isEmpty()) {
+            skill = skillService.getOrCreateSkill(request.getSkill().trim());
+        } else {
+            throw new BadRequestException("Skill ID or skill name must be provided");
+        }
+
+        if (jobSkillRepository.existsByJobIdAndSkillId(jobId, skill.getId())) {
             throw new DuplicateResourceException("Skill already assigned to this job");
         }
 
