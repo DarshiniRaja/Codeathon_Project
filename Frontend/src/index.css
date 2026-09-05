@@ -1,16 +1,20 @@
 :root {
-  --bg: #f4f7fb;
-  --surface: #ffffff;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --sidebar: #0b1220;
-  --accent: #0d9488;
-  --accent-2: #0f766e;
-  --danger: #dc2626;
-  --ok: #059669;
-  --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-  --radius: 14px;
+  --bg: #f5f3ee;
+  --surface: #fffdf9;
+  --surface-soft: #f1eee7;
+  --ink: #192332;
+  --muted: #718090;
+  --line: #e5e0d6;
+  --sidebar: #172536;
+  --sidebar-soft: #22364a;
+  --accent: #e86f51;
+  --accent-2: #c9573d;
+  --mint: #9ed8c5;
+  --danger: #c94c4c;
+  --ok: #2f9072;
+  --shadow: 0 18px 45px rgba(38, 48, 61, 0.08);
+  --shadow-hover: 0 22px 48px rgba(38, 48, 61, 0.14);
+  --radius: 16px;
 }
 
 *,
@@ -27,9 +31,12 @@ body,
 }
 
 body {
-  font-family: "DM Sans", system-ui, sans-serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--ink);
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 92% 4%, rgba(158, 216, 197, 0.18), transparent 28rem),
+    var(--bg);
+  line-height: 1.5;
 }
 
 button,
@@ -58,8 +65,9 @@ a {
 
 .login-brand {
   background:
-    radial-gradient(circle at 20% 20%, rgba(13, 148, 136, 0.35), transparent 40%),
-    linear-gradient(160deg, #0b1220, #134e4a 80%);
+    radial-gradient(circle at 18% 18%, rgba(232, 111, 81, 0.48), transparent 25%),
+    radial-gradient(circle at 85% 78%, rgba(158, 216, 197, 0.22), transparent 28%),
+    linear-gradient(145deg, #172536, #253c50 72%, #304b5b);
   color: #ecfeff;
   display: flex;
   align-items: center;
@@ -78,6 +86,7 @@ a {
   font-size: clamp(32px, 4vw, 52px);
   line-height: 1.1;
   margin-bottom: 16px;
+  letter-spacing: -0.04em;
 }
 
 .login-lead {
@@ -96,8 +105,8 @@ a {
   width: min(420px, 100%);
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 32px;
+  border-radius: 24px;
+  padding: 36px;
   box-shadow: var(--shadow);
   display: grid;
   gap: 14px;
@@ -107,7 +116,7 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  background: #f1f5f9;
+  background: var(--surface-soft);
   padding: 6px;
   border-radius: 12px;
 }
@@ -125,7 +134,7 @@ a {
   background: #fff;
   color: var(--ink);
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 5px 14px rgba(38, 48, 61, 0.1);
 }
 
 label {
@@ -140,9 +149,11 @@ select,
 textarea {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 11px 12px;
-  background: #fff;
+  border-radius: 11px;
+  padding: 12px 13px;
+  background: #fffefa;
+  color: var(--ink);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 input[type="checkbox"] {
@@ -152,8 +163,9 @@ input[type="checkbox"] {
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 2px solid rgba(13, 148, 136, 0.35);
+  outline: 0;
   border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(232, 111, 81, 0.14);
 }
 
 .muted {
@@ -175,7 +187,7 @@ textarea:focus {
 .app-shell {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 274px 1fr;
 }
 
 .sidebar {
@@ -183,7 +195,7 @@ textarea:focus {
   color: #e2e8f0;
   display: flex;
   flex-direction: column;
-  padding: 20px 14px;
+  padding: 24px 16px;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -193,7 +205,7 @@ textarea:focus {
   display: flex;
   gap: 12px;
   align-items: center;
-  padding: 8px 10px 20px;
+  padding: 6px 10px 28px;
 }
 
 .logo-mark {
@@ -205,6 +217,8 @@ textarea:focus {
   background: var(--accent);
   color: #fff;
   font-weight: 700;
+  box-shadow: 0 8px 18px rgba(232, 111, 81, 0.28);
+  animation: logo-drift 6s ease-in-out infinite;
 }
 
 .sidebar-brand span {
@@ -215,21 +229,23 @@ textarea:focus {
 
 .nav {
   display: grid;
-  gap: 4px;
+  gap: 7px;
   flex: 1;
 }
 
 .nav a {
   text-decoration: none;
   color: #cbd5e1;
-  padding: 10px 12px;
-  border-radius: 10px;
+  padding: 12px 14px;
+  border-radius: 11px;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .nav a.active,
 .nav a:hover {
-  background: #1e293b;
+  background: var(--sidebar-soft);
   color: #fff;
+  transform: translateX(3px);
 }
 
 .sidebar-user {
@@ -256,18 +272,19 @@ textarea:focus {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 18px 24px 8px;
+  padding: 28px 34px 14px;
 }
 
 .topbar h1 {
-  font-size: 22px;
+  font-size: 25px;
+  letter-spacing: -0.035em;
   flex: 1;
 }
 
 .icon-btn {
   display: none;
   border: 0;
-  background: #fff;
+  background: var(--surface);
   width: 40px;
   height: 40px;
   border-radius: 10px;
@@ -276,22 +293,23 @@ textarea:focus {
 
 .source-pill {
   font-size: 12px;
-  background: #ccfbf1;
-  color: #0f766e;
+  background: #dff3e9;
+  color: #2a725f;
   padding: 6px 10px;
   border-radius: 999px;
   font-weight: 600;
 }
 
 .content {
-  padding: 8px 24px 40px;
+  padding: 10px 34px 54px;
+  max-width: 1480px;
 }
 
 .grid-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 18px;
+  margin-bottom: 24px;
 }
 
 .metric-card,
@@ -300,10 +318,30 @@ textarea:focus {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  animation: rise-in 500ms both;
 }
 
 .metric-card {
-  padding: 18px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.metric-card::after {
+  content: '';
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  right: -34px;
+  top: -34px;
+  border-radius: 50%;
+  background: rgba(158, 216, 197, 0.3);
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
 }
 
 .metric-card .label {
@@ -312,14 +350,15 @@ textarea:focus {
 }
 
 .metric-card .value {
-  font-size: 32px;
+  font-size: 34px;
+  letter-spacing: -0.05em;
   font-weight: 700;
   margin-top: 8px;
 }
 
 .panel {
-  padding: 18px;
-  margin-bottom: 18px;
+  padding: 24px;
+  margin-bottom: 22px;
 }
 
 .panel-head {
@@ -327,7 +366,12 @@ textarea:focus {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.panel-head h2 {
+  font-size: 18px;
+  letter-spacing: -0.025em;
 }
 
 .table-wrap {
@@ -342,7 +386,7 @@ table {
 th,
 td {
   text-align: left;
-  padding: 10px 8px;
+  padding: 14px 10px;
   border-bottom: 1px solid var(--line);
   font-size: 14px;
   vertical-align: middle;
@@ -353,13 +397,21 @@ th {
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
+}
+
+tbody tr {
+  transition: background 140ms ease;
+}
+
+tbody tr:hover {
+  background: #faf7f0;
 }
 
 .btn {
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 10px 14px;
+  border-radius: 11px;
+  padding: 11px 15px;
   cursor: pointer;
   font-weight: 600;
   text-decoration: none;
@@ -368,6 +420,12 @@ th {
   justify-content: center;
   background: #fff;
   color: var(--ink);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 16px rgba(38, 48, 61, 0.1);
 }
 
 .btn-primary {
@@ -478,7 +536,7 @@ th {
 }
 
 .state {
-  padding: 28px;
+  padding: 36px;
   text-align: center;
   color: var(--muted);
 }
@@ -500,7 +558,8 @@ th {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: conic-gradient(var(--accent) calc(var(--p) * 1%), #e2e8f0 0);
+  background: conic-gradient(var(--accent) calc(var(--p) * 1%), #e8e3da 0);
+  animation: ring-turn 900ms ease-out both;
 }
 
 .match-ring span {
@@ -519,6 +578,28 @@ th {
   gap: 12px;
   flex-wrap: wrap;
   align-items: end;
+}
+
+.logo-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logo-drift {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(6deg) translateY(-2px); }
+}
+
+@keyframes ring-turn {
+  from { transform: rotate(-24deg); opacity: 0.4; }
+  to { transform: rotate(0); opacity: 1; }
 }
 
 .filters label {
@@ -576,5 +657,13 @@ th {
   .topbar {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .topbar {
+    padding-top: 20px;
+  }
+
+  .panel {
+    padding: 18px;
   }
 }

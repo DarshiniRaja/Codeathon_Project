@@ -36,7 +36,9 @@ export function Layout() {
     <div className="app-shell">
       <aside className={`sidebar${open ? ' is-open' : ''}`}>
         <div className="sidebar-brand">
-          <span className="logo-mark">SG</span>
+          <span className="logo-mark">
+  <img src="/logo.jpeg" alt="Skill Gap Analyzer logo" />
+</span>
           <div>
             <strong>Skill Gap</strong>
             <span>Analyzer</span>
